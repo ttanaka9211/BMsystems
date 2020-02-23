@@ -13,7 +13,7 @@ class CreateShiftWeekTable extends Migration
     {
         Schema::create('shift_week', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->
+            $table->string('week');
             $table->timestamps();
         });
     }
