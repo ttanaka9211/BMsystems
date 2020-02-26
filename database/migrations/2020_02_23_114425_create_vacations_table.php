@@ -4,16 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimezoneTable extends Migration
+class CreateVacationsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('timezone', function (Blueprint $table) {
+        Schema::create('vacations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('timezone');
+            $table->integer('user_id');
+            $table->datetime('date');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ class CreateTimezoneTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timezone');
+        Schema::dropIfExists('vacations');
     }
 }

@@ -4,18 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBaseshiftTable extends Migration
+class CreateTimezonesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('baseshift', function (Blueprint $table) {
+        Schema::create('timezones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('clerk_id');
-            $table->integer('week_id');
-            $table->integer('timezone_id');
+            $table->string('timezone');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ class CreateBaseshiftTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baseshift');
+        Schema::dropIfExists('timezones');
     }
 }

@@ -13,36 +13,36 @@ class WeekTableSeeder extends Seeder
         $param = [
             'week' => '月曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
 
         $param = [
             'week' => '火曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
 
         $param = [
             'week' => '水曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
 
         $param = [
             'week' => '木曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
 
         $param = [
             'week' => '金曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
 
         $param = [
             'week' => '土曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
 
         $param = [
             'week' => '日曜日',
         ];
-        DB::table('week')->insert($param);
+        DB::table('weeks')->insert($param);
     }
 }

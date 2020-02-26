@@ -21,6 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('mobile');
             $table->integer('zipcode');
             $table->text('address');
+            $table->integer('hourly_wage');
+            $table->date('hire_date');
+            $table->date('leave_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

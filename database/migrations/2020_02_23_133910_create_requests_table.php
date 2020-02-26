@@ -4,16 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWeekTable extends Migration
+class CreateRequestsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('week', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('week');
+            $table->integer('user_id');
+            $table->integer('week_id');
+            $table->integer('timezone_id');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ class CreateWeekTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('week');
+        Schema::dropIfExists('requests');
     }
 }
