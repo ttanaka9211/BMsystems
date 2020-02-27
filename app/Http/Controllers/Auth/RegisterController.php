@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -33,8 +34,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -44,13 +43,13 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -59,7 +58,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \App\User
      */
     protected function create(array $data)
@@ -69,5 +69,17 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function pre_check(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        //flash data
+        $request->flashOnly('email');
+        $bridge_request = $request->all();
+        //password マスキング
+        $bridge_request['password_mask'] = '******';
+
+        return view('auth.register_check')->with($bridge_request);
     }
 }
