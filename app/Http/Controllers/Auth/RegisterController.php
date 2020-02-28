@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -98,6 +99,52 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         event(new Registered($user = $this->create($request->all())));
+
         return view('auth.registered');
+    }
+
+    public function showForm($email_token)
+    {
+        //使用可能なトークンか
+        if (!User::where('email_verify_token', $email_token)->exists()) {
+            return view('auth.main.register')->with('message', '無効なトークンです。');
+        } else {
+            $user = User::where('email_verify_token', $email_token)->first();
+            //本登録済みユーザーか
+            if ($user->status == config('const.USER_STATUS.REGISTER')) {
+                logger("status" . $user->status);
+                return view('auth.main.register')->with('message' . '既に本登録されています。ログインして利用して下さい。');
+            }
+            //ユーザーステータス更新
+            $user->status = config('const.USER_STATUS.MAIL_AUTHED');
+            $user->verify_at = Carbon::now();
+            if ($user->save()) {
+                return view('auth.main.register' . compact('email_token'));
+            } else {
+                return view('auth.main.register')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックください。');
+            }
+        }
+    }
+    public function mainCheck(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'name_pronunciation' => 'required|string',
+            'birth_year' => 'required|numeric',
+            'birth_month' => 'required|numeric',
+            'birth_day' => 'required|numeric',
+
+        ]);
+        //データ保存用
+        $email_token = $request->email_token;
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->name_pronunciation = $request->name_pronunciation;
+        $user->birth_year = $request->birth_year;
+        $user->birth_month = $request->birth_month;
+        $user->birth_day = $request->birth_day;
+
+        return view('auth.main.register_check', compact('user', 'email_token'));
     }
 }

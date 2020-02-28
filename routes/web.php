@@ -24,3 +24,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('register/pre_check', 'Auth\RegisterController@pre_check')->name('register.pre_check');
+Route::get('register/verify/{token}', 'Auth\RegisterController@shoFrom');
