@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\EmailVerification;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -64,11 +67,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        // return User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
+        $user = User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_verify_token' => base64_encode($data['email']),
         ]);
+
+        $email = new EmailVerification($user);
+        Mail::to($user->email)->send($email);
+
+        return $user;
     }
 
     public function pre_check(Request $request)
@@ -81,5 +94,10 @@ class RegisterController extends Controller
         $bridge_request['password_mask'] = '******';
 
         return view('auth.register_check')->with($bridge_request);
+    }
+    public function register(Request $request)
+    {
+        event(new Registered($user = $this->create($request->all())));
+        return view('auth.registered');
     }
 }
