@@ -108,7 +108,7 @@ class RegisterController extends Controller
      * @param $email_token
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showForm($email_token)
+    public function showFrom($email_token)
     {
         // 使用可能なトークンか
         if (!User::where('email_verify_token', $email_token)->exists()) {
