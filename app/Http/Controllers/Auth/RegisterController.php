@@ -103,28 +103,6 @@ class RegisterController extends Controller
         return view('auth.registered');
     }
 
-    // public function showForm($email_token)
-    // {
-    //     //使用可能なトークンか
-    //     if (!User::where('email_verify_token', $email_token)->exists()) {
-    //         return view('auth.main.register')->with('message', '無効なトークンです。');
-    //     } else {
-    //         $user = User::where('email_verify_token', $email_token)->first();
-    //         //本登録済みユーザーか
-    //         if ($user->status == config('const.USER_STATUS.REGISTER')) {
-    //             logger("status" . $user->status);
-    //             return view('auth.main.register')->with('message' . '既に本登録されています。ログインして利用して下さい。');
-    //         }
-    //         //ユーザーステータス更新
-    //         $user->status = config('const.USER_STATUS.MAIL_AUTHED');
-    //         $user->verify_at = Carbon::now();
-    //         if ($user->save()) {
-    //             return view('auth.main.register' . compact('email_token'));
-    //         } else {
-    //             return view('auth.main.register')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックください。');
-    //         }
-    //     }
-    // }
     /**
      * 本会員登録 入力画面
      * @param $email_token
