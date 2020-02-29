@@ -34,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -85,7 +85,7 @@ class RegisterController extends Controller
         return $user;
     }
 
-    public function pre_check(Request $request)
+    public function preCheck(Request $request)
     {
         $this->validator($request->all())->validate();
         //flash data
