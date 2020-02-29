@@ -85,7 +85,7 @@ class RegisterController extends Controller
         return $user;
     }
 
-    public function preCheck(Request $request)
+    public function pre_check(Request $request)
     {
         $this->validator($request->all())->validate();
         //flash data
@@ -103,25 +103,52 @@ class RegisterController extends Controller
         return view('auth.registered');
     }
 
+    // public function showForm($email_token)
+    // {
+    //     //使用可能なトークンか
+    //     if (!User::where('email_verify_token', $email_token)->exists()) {
+    //         return view('auth.main.register')->with('message', '無効なトークンです。');
+    //     } else {
+    //         $user = User::where('email_verify_token', $email_token)->first();
+    //         //本登録済みユーザーか
+    //         if ($user->status == config('const.USER_STATUS.REGISTER')) {
+    //             logger("status" . $user->status);
+    //             return view('auth.main.register')->with('message' . '既に本登録されています。ログインして利用して下さい。');
+    //         }
+    //         //ユーザーステータス更新
+    //         $user->status = config('const.USER_STATUS.MAIL_AUTHED');
+    //         $user->verify_at = Carbon::now();
+    //         if ($user->save()) {
+    //             return view('auth.main.register' . compact('email_token'));
+    //         } else {
+    //             return view('auth.main.register')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックください。');
+    //         }
+    //     }
+    // }
+    /**
+     * 本会員登録 入力画面
+     * @param $email_token
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showForm($email_token)
     {
-        //使用可能なトークンか
+        // 使用可能なトークンか
         if (!User::where('email_verify_token', $email_token)->exists()) {
             return view('auth.main.register')->with('message', '無効なトークンです。');
         } else {
             $user = User::where('email_verify_token', $email_token)->first();
-            //本登録済みユーザーか
-            if ($user->status == config('const.USER_STATUS.REGISTER')) {
+            // 本登録済みユーザーか
+            if ($user->status == config('const.USER_STATUS.REGISTER')) //REGISTER=1
+            {
                 logger("status" . $user->status);
-                return view('auth.main.register')->with('message' . '既に本登録されています。ログインして利用して下さい。');
+                return view('auth.main.register')->with('message', 'すでに本登録されています。ログインして利用してください。');
             }
-            //ユーザーステータス更新
+            // ユーザーステータス更新
             $user->status = config('const.USER_STATUS.MAIL_AUTHED');
-            $user->verify_at = Carbon::now();
             if ($user->save()) {
-                return view('auth.main.register' . compact('email_token'));
+                return view('auth.main.register', compact('email_token'));
             } else {
-                return view('auth.main.register')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックください。');
+                return view('auth.main.register')->with('message', 'メール認証に失敗しました。再度、メールからリンクをクリックしてください。');
             }
         }
     }

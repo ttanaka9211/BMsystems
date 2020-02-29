@@ -18,7 +18,7 @@
 Route::get('/', 'HomeController@index');
 
 /* ログイン、ログアウト、パスワード変更、パスワード変更（忘れた時） */
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('register/pre_check', 'Auth\RegisterController@pre_check')->name('register.pre_check');
 //本会員登録入力
