@@ -50,4 +50,9 @@ class User extends Authenticatable implements MustVerifyEmailContract
     {
         $this->notify(new CustomResetPassword($token));
     }
+
+    public function accounts()
+    {
+        return $this->hasMany('App\linkedSocialAccount');
+    }
 }
