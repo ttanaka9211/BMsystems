@@ -16,7 +16,10 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
         "nesbot/carbon": "^2.30",
-        "ramsey/uuid": "^3.9"
+        "ramsey/uuid": "^3.9",
+        "socialiteproviders/google": "^3.0",
+        "socialiteproviders/line": "^2.1",
+        "socialiteproviders/twitter": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
