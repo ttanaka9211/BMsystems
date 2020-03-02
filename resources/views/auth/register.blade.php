@@ -55,6 +55,9 @@
                             </div>
                         </div>
                     </form>
+                    <a id="line-button" class="btn btn-block btn-social button">
+                        <i class="fab fa-line"></i> LINEでログイン</a>
+
                 </div>
             </div>
         </div>
