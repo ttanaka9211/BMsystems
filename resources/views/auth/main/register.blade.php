@@ -14,7 +14,7 @@
 
                     @empty($message)
                         <div class="card-body">
-                            <form method="POST" action="{{ route('register.pre_check') }}">
+                            <form method="POST" action="{{ route('register.main.check') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">名前</label>
@@ -101,7 +101,6 @@
                                                 @endif
                                             </div>日
                                         </div>
-
                                         <div class="row col-md-6 col-md-offset-4">
                                             @if ($errors->has('birth'))
                                                 <span class="help-block">
@@ -119,6 +118,7 @@
                                 </button>
                             </div>
                         </div>
+                        <input type="hidden" name="email_token" value="{{$email_token}}">
                         </form>
                 </div>
                 @endempty

@@ -11,20 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
+Route::get('/', 'HomeController@index');
+
+/* ログイン、ログアウト、パスワード変更、パスワード変更（忘れた時） */
 Auth::routes(['verify' => true]);
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::post('register/pre_check', 'Auth\RegisterController@pre_check')->name('register.pre_check');
-Route::get('register/verify/{token}', 'Auth\RegisterController@shoFrom');
+//本会員登録入力
+Route::get('register/verify/{token}', 'Auth\RegisterController@showForm');
 Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('register.main.check');
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
 Route::get('login/{provider}', 'Auth\LoginController@socialLogin');
