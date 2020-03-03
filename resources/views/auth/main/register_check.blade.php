@@ -47,6 +47,7 @@
                                 </button>
                             </div>
                         </div>
+                        <input type="hidden" name="email_token" value="{{email_token}}">
                     </form>
                 </div>
             </div>
