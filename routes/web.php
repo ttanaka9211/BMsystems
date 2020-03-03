@@ -27,3 +27,5 @@ Route::post('register/pre_check', 'Auth\RegisterController@pre_check')->name('re
 Route::get('register/verify/{token}', 'Auth\RegisterController@shoFrom');
 Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('register.main.check');
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
+Route::get('login/{provider}', 'Auth\LoginController@socialLogin');
+Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
