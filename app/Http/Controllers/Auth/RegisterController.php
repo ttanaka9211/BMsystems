@@ -135,6 +135,10 @@ class RegisterController extends Controller
         $request->validate([
             'name' => 'required|string',
             'name_pronunciation' => 'required|string',
+            'phone' => 'numeric',
+            'mobile' => 'numeric',
+            'zipcode' => 'required|numeric',
+            'address' => 'required|string',
             'birth_year' => 'required|numeric',
             'birth_month' => 'required|numeric',
             'birth_day' => 'required|numeric',
@@ -146,6 +150,10 @@ class RegisterController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->name_pronunciation = $request->name_pronunciation;
+        $user->phone = $request->phone;
+        $user->mobile = $request->mobile;
+        $user->zipcode = $request->zipcode;
+        $user->address = $request->address;
         $user->birth_year = $request->birth_year;
         $user->birth_month = $request->birth_month;
         $user->birth_day = $request->birth_day;
@@ -157,8 +165,11 @@ class RegisterController extends Controller
         $user = User::where('email_verify_token', $request->email_token)->first();
         $user->status = config('const.USER_STATUS.REGISTER');
         $user->name = $request->name;
-
         $user->name_pronunciation = $request->name_pronunciation;
+        $user->phone = $request->phone;
+        $user->mobile = $request->mobile;
+        $user->zipcode = $request->zipcode;
+        $user->address = $request->address;
         $user->birth_year = $request->birth_year;
         $user->birth_month = $request->birth_month;
         $user->birth_day = $request->birth_day;

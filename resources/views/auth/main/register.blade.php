@@ -51,8 +51,80 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label for="phone"
+                                        class="col-md-4 col-form-label text-md-right">電話番号</label>
+
+                                    <div class="col-md-6">
+                                        <input id="name_pronunciation" type="text"
+                                            class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                            name="phone" value="{{ old('phone') }}"
+                                            required>
+
+                                        @if ($errors->has('phone'))
+                                            <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="mobile"
+                                        class="col-md-4 col-form-label text-md-right">携帯番号</label>
+
+                                    <div class="col-md-6">
+                                        <input id="mobile" type="text"
+                                            class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}"
+                                            name="mobile" value="{{ old('mobile') }}"
+                                            required>
+
+                                        @if ($errors->has('mobile'))
+                                            <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('mobile') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="zipcode"
+                                        class="col-md-4 col-form-label text-md-right">郵便番号</label>
+
+                                    <div class="col-md-6">
+                                        <input id="zipcode" type="text"
+                                            class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}"
+                                            name="zipcode" value="{{ old('zipcode') }}"
+                                            required>
+
+                                        @if ($errors->has('zipcode'))
+                                            <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('zippcode') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="address"
+                                        class="col-md-4 col-form-label text-md-right">住所</label>
+
+                                    <div class="col-md-6">
+                                        <input id="address" type="text"
+                                            class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}"
+                                            name="address" value="{{ old('address') }}"
+                                            required>
+
+                                        @if ($errors->has('address'))
+                                            <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <label for="name_pronunciation"
-                                           class="col-md-4 col-form-label text-md-right">生年月日</label>
+                                        class="col-md-4 col-form-label text-md-right">生年月日</label>
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-4">
