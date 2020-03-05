@@ -28,6 +28,38 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">電話番号</label>
+                            <div class="col-md-6">
+                                <span class="">{{$user->phone}}</span>
+                                <input type="hidden" name="phone" value="{{$user->phone}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name_pronunciation" class="col-md-4 col-form-label text-md-right">携帯番号</label>
+                            <div class="col-md-6">
+                                <span class="">{{$user->mobile}}</span>
+                                <input type="hidden" name="mobile" value="{{$user->mobile}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name_pronunciation" class="col-md-4 col-form-label text-md-right">郵便番号</label>
+                            <div class="col-md-6">
+                                <span class="">{{$user->zipcode}}</span>
+                                <input type="hidden" name="zipcode" value="{{$user->zipcode}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name_pronunciation" class="col-md-4 col-form-label text-md-right">住所</label>
+                            <div class="col-md-6">
+                                <span class="">{{$user->address}}</span>
+                                <input type="hidden" name="address" value="{{$user->address}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="birth" class="col-md-4 col-form-label text-md-right">生年月日</label>
                             <div class="col-md-6">
                                 <span class="">{{$user->birth_year}}年</span>
