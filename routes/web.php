@@ -27,9 +27,30 @@ Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('r
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
 Route::get('login/{provider}', 'Auth\LoginController@socialLogin');
 Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
-//管理者画面
-Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
-    Route::get('/home', 'Addministrator\HomeController@index');
+////管理者画面
+//Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
+//    Route::get('/home', 'Addministrator\HomeController@index');
+//});
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+// 全ユーザ
+Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
+    // ユーザ一覧
+    Route::get('/account', 'AccountController@index')->name('account.index');
 });
-//ユーザー編集画面
-Route::resource('users', 'UserController');
+
+// 管理者以上
+Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
+    // ユーザ編集
+    Route::get('/account/edit/{user_id}', 'AccountController@edit')->name('account.edit');
+    Route::post('/account/edit/{user_id}', 'AccountController@updateData')->name('account.edit');
+
+    // ユーザ削除
+    Route::post('/account/delete/{user_id}', 'AccountController@deleteData');
+});
+
+// システム管理者のみ
+Route::group(['middleware' => ['auth', 'can:system-only']], function () {
+});
