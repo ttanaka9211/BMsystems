@@ -1,24 +1,17 @@
 @extends('layouts.app');
 @section('content')
-    <div class="container">
-        <h1>{{ $title ?? '' }}</h1>
-        <div class="table-responsive">
-            <table class="table-striped">
-                <thead>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('Name') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($Users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td><a href="{{ url('users/'.$user->id) }}">{{ $user->name }}</a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+<table>
+    <tr>
+        <th>name</th>
+        <th>mail</th>
+        <th>zipcode</th>
+    </tr>
+    @foreach ($items as $item)
+    <tr>
+        <td>{{$item->name}}</td>
+        <td>{{$item->email}}</td>
+        <td>{{$item->zipcode}}</td>
+    </tr>
+    @endforeach
+</table>
 @endsection
