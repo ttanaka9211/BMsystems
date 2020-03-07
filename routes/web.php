@@ -31,3 +31,5 @@ Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginControll
 Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
     Route::get('/home', 'Addministrator\HomeController@index');
 });
+//ユーザー編集画面
+Route::resource('users', 'UserController');
