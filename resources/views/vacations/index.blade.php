@@ -40,7 +40,7 @@
     </div>
     <div>
         <label>date</label><br>
-        <input type="text" name="date" id="">
+        <input type="date" name="date" id="">
     </div>
     <div>
         <input type="submit" value="Create" />
