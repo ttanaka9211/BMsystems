@@ -26,7 +26,7 @@ Route::get('register/verify/{token}', 'Auth\RegisterController@showForm');
 Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('register.main.check');
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
 Route::get('login/{provider}', 'Auth\LoginController@socialLogin');
-Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 ////管理者画面
 //Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
