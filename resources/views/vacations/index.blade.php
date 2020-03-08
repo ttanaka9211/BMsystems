@@ -16,6 +16,7 @@
             <td>{{ $vacation->id }}</td>
             <td>{{ $vacation->use_id }}</td>
             <td>{{ $vacation->date }}</td>
+            <td>{{ $vacation->reason }}</td>
         </tr>
     @endforeach
 </table>
@@ -41,6 +42,10 @@
     <div>
         <label>date</label><br>
         <input type="date" name="date" id="">
+    </div>
+    <div>
+        <label>理由</label><br>
+        <textarea name="reason"></textarea>
     </div>
     <div>
         <input type="submit" value="Create" />
