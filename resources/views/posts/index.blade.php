@@ -35,7 +35,7 @@
     {{ csrf_field() }}
     <div>
         <label>user_id</label><br>
-        <input type="text" name="user_id" />
+        {{ Auth::id() }}
     </div>
     <div>
         <label>date</label><br>
