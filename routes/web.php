@@ -55,3 +55,7 @@ Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
 // システム管理者のみ
 Route::group(['middleware' => ['auth', 'can:system-only']], function () {
 });
+
+//休み希望
+Route::get('posts', 'PostsController@index');
+Route::post('posts', 'PostsController@store');
