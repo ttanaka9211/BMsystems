@@ -27,9 +27,5 @@ Route::post('register/main_check', 'Auth\RegisterController@mainCheck')->name('r
 Route::post('register/main_register', 'Auth\RegisterController@mainRegister')->name('register.main.registered');
 Route::get('login/{provider}', 'Auth\LoginController@socialLogin');
 Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
-//管理者画面
-Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
-    Route::get('/home', 'Addministrator\HomeController@index');
-});
 //ユーザー編集画面
 Route::resource('users', 'UserController');
