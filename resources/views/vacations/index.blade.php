@@ -40,6 +40,10 @@
         <input type="text" name="user_id" />
     </div>
     <div>
+        <label>name</label><br>
+        <input type="text" name="user_id" />
+    </div>
+    <div>
         <label>date</label><br>
         <input type="date" name="date" id="">
     </div>
