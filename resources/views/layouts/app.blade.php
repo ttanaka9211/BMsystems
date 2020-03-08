@@ -35,7 +35,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                         @can('system-only') {{-- システム管理者権限のみに表示される --}}
+    <li><a href="">機能１</a></li>
+    @elsecan('admin-higher')　{{-- 管理者権限以上に表示される --}}
+    <li><a href="">機能２</a></li>
+    <li><a href="">機能３</a></li>
+    @elsecan('user-higher') {{-- 一般権限以上に表示される --}}
+    <li><a href="">機能４</a></li>
+    <li><a href="">機能４</a></li>
+    <li><a href="">機能４</a></li>
+    <li><a href="">機能５</a></li>
+    @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->
