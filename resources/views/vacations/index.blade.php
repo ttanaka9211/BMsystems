@@ -32,7 +32,7 @@
     </div>
 @endif
 
-<form action="/vacation" method="POST">
+<form action="/vacations" method="POST">
     {{ csrf_field() }}
     <div>
         <label>user_id</label><br>
