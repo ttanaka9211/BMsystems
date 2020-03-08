@@ -56,9 +56,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $user = User::whereNotNull('hourly_wage')->get();
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -68,9 +69,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        //
+        $user->hourly_wage = $request->hourly_wage;
+        $user->save();
+        return redirect('users/' . $user->id);
     }
 
     /**
