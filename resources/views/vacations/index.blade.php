@@ -16,6 +16,7 @@
             <td>{{ $vacation->id }}</td>
             <td>{{ $vacation->use_id }}</td>
             <td>{{ $vacation->date }}</td>
+            <td>{{ $vacation->reason }}</td>
         </tr>
     @endforeach
 </table>
@@ -32,7 +33,7 @@
     </div>
 @endif
 
-<form action="/vacation" method="POST">
+<form action="/vacations" method="POST">
     {{ csrf_field() }}
     <div>
         <label>user_id</label><br>
@@ -41,6 +42,10 @@
     <div>
         <label>date</label><br>
         <input type="date" name="date" id="">
+    </div>
+    <div>
+        <label>理由</label><br>
+        <textarea name="reason"></textarea>
     </div>
     <div>
         <input type="submit" value="Create" />

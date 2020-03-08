@@ -18,6 +18,7 @@ class VacationController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'date' => 'required | after:tomorrow+13day',
+            'reason' => 'required',
         ]);
 
         if ($validator->fails()) {
