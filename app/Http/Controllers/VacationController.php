@@ -30,4 +30,7 @@ class VacationController extends Controller
         Vacation::create($request->all());
         return redirect('vacations');
     }
+    protected function registered(Request $request, $user)
+    {
+    }
 }

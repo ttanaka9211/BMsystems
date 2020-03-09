@@ -11,15 +11,16 @@ use Illuminate\Queue\SerializesModels;
 class VacationRequest extends Mailable
 {
     use Queueable, SerializesModels;
-    private $vacation;
+
+    private $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Vacation $user)
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +30,7 @@ class VacationRequest extends Mailable
      */
     public function build()
     {
-        return $this->subject('ユーザー登録がありました')
+        return $this->subject('休日申請がありました')
             ->view('emails.auth.registered')
             ->with('user', $this->user);
     }
