@@ -35,3 +35,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
 //休み希望送信
 Route::get('vacations', 'VacationController@index');
 Route::post('vacations', 'VacationController@store');
+//承認機能
+Route::prefix('admin')->group(function () {
+    Route::get('user_accept', 'Admin\UserAcceptController@index');
+    Route::get('ajax/user_accept', 'Admin\Ajax\UserAcceptController@index');
+    Route::post('ajax/user_accept/accept', 'Admin\Ajax\UserAcceptController@accept');
+});
