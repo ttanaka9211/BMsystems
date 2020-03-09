@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $items = User::all();
+        $items = User::whereNull('hourly_wage')->get();
         return view('users.index', ['items' => $items]);
     }
 
@@ -58,7 +58,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $user = User::whereNotNull('hourly_wage')->get();
+        $user = User::find($user->id);
         return view('users.edit', ['user' => $user]);
     }
 
@@ -71,6 +71,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
+        $user = User::find($user->id);
+        $user->name = $request->name;
         $user->hourly_wage = $request->hourly_wage;
         $user->save();
         return redirect('users/' . $user->id);
