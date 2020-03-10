@@ -12,7 +12,7 @@
         <td>{{$item->name}}</td>
         <td>{{$item->email}}</td>
         <td>{{$item->hourly_wage}}</td>
-        <td><a href="{{route('users.edit')}}?id={{$item->id}}"></a></td>
+        <td><a href={{ route('users.edit', ['user' => $item->id]) }}>編集</a></td>
     </tr>
     @endforeach
 </table>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h1>{{ $title }}</h1>
+    <h1>時給変更</h1>
     <form action="{{ url('users/'.$user->id) }}" method="post">
         @csrf
         @method('PUT')
