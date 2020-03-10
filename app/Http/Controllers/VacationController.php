@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Vacation;
 use App\User;
-use APP\Mail\VacationRequest;
+use App\Mail\VacationRequest;
 
 class VacationController extends Controller
 {
@@ -30,13 +30,15 @@ class VacationController extends Controller
         }
 
         Vacation::create($request->all());
+        $admin_email = 'admin@example.com';
+        Mail::to($admin_email)->send(new VacationRequest($request->name));
         return redirect('vacations');
     }
-    protected function registered(Request $request, $user)
-    {
-        $admin_email = 'admin@example.com';
-        Mail::to($admin_email)->send(new VacationRequest($user));
+    // protected function registered(Request $request, $user)
+    // {
+    //     $admin_email = 'admin@example.com';
+    //     Mail::to($admin_email)->send(new VacationRequest($user));
 
-        return '申請が完了しました。承認されるまでしばらくお待ちください';
-    }
+    //     return '申請が完了しました。承認されるまでしばらくお待ちください';
+    // }
 }
