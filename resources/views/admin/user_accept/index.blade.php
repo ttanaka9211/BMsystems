@@ -8,6 +8,8 @@
             <thead>
                 <th>名前</th>
                 <th>E-Mail</th>
+                <th>日付</th>
+                <th>理由</th>
                 <th>承認状態</th>
                 <th></th>
                 <th></th>
@@ -16,6 +18,8 @@
                 <tr v-for="user in users">
                     <td v-text="user.name"></td>
                     <td v-text="user.email"></td>
+                    <td v-text="user.date"></td>
+                    <td v-text="user.reason"></td>
                     <td>
                         <div class="text-success" v-if="user.accepted">承認済み</div>
                         <div class="text-danger" v-else>未承認</div>

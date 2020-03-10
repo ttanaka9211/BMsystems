@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vacation extends Model
 {
-    protected $fillable = ['user_id', 'name', 'date', 'reason'];
+    protected $fillable = ['user_id', 'name', 'email', 'date', 'reason'];
 }
