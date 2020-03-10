@@ -8,11 +8,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class VacationRequest extends Mailable
+class UserAccept extends Mailable
 {
     use Queueable, SerializesModels;
 
     private $user;
+
     /**
      * Create a new message instance.
      *
@@ -30,8 +31,8 @@ class VacationRequest extends Mailable
      */
     public function build()
     {
-        return $this->subject('休日申請がありました')
-            ->view('emails.VacationRequest')
+        return $this->subject('申請結果が出ました。')
+            ->view('emails.UserAccept')
             ->with('user', $this->user);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Ajax;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\UserAccept;
+use Illuminate\Support\Facades\Mail;
 
 class UserAcceptController extends Controller
 {
@@ -19,6 +21,8 @@ class UserAcceptController extends Controller
         $user = \App\Models\Vacation::find($request->user_id);
         $user->accepted = $request->accept;
         $result = $user->save();
+        $admin_email = 'admin@example.com';
+        Mail::to($request->email)->send(new UserAccept($request->name));
         return ['result' => $result];
     }
 }

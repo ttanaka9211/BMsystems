@@ -15,10 +15,16 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->role === '5') {
-            return $next($request);
-        }
+        if (auth()->check()) {
 
-        abort(403, '管理者権限がありません。');
+            $role = auth()->user()->role;
+
+            if (in_array($role, ['5', '1'])) {
+
+                return $next($request);
+            }
+
+            abort(403, '管理者権限がありません。');
+        }
     }
 }
