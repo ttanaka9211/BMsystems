@@ -18,7 +18,7 @@ class VacationController extends Controller
     }
     public function index()
     {
-        return view('vacations.index')->with(['vacations' => Vacation::where('id', auth::id())->get()]);
+        return view('vacations.index')->with(['vacations' => Vacation::where('user_id', auth::id())->get()]);
     }
 
     public function store(Request $request)
