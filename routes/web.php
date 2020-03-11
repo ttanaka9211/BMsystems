@@ -35,6 +35,7 @@ Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginControll
 //休み希望送信
 Route::get('vacations', 'VacationController@index');
 Route::post('vacations', 'VacationController@store');
+
 //承認機能
 Route::prefix('admin')->group(function () {
     Route::get('user_accept', 'Admin\UserAcceptController@index')->middleware('admin_auth');

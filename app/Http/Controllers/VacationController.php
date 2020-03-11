@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -11,9 +12,13 @@ use App\Mail\VacationRequest;
 
 class VacationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        return view('vacations.index')->with(['vacations' => Vacation::all()]);
+        return view('vacations.index')->with(['vacations' => Vacation::where('id', auth::id())->get()]);
     }
 
     public function store(Request $request)

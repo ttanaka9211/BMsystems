@@ -21,8 +21,8 @@ class UserAcceptController extends Controller
         $user = \App\Models\Vacation::find($request->user_id);
         $user->accepted = $request->accept;
         $result = $user->save();
-        $admin_email = 'admin@example.com';
-        Mail::to($request->email)->send(new UserAccept($request->name));
+        $email = new UserAccept($user);
+        Mail::to($user->email)->send($email);
         return ['result' => $result];
     }
 }

@@ -2,12 +2,25 @@
 
 @section('content')
     <h1>休日申請</h1>
-
+<table>
+    <tr>
+        <th>名前</th>
+        <th>日付</th>
+        <th>承認状態</th>
+    </tr>
+    @foreach ($vacations as $vacation)
+        <tr>
+            <td>{{ $vacation->name }}</td>
+            <td>{{ $vacation->date }}</td>
+            <td>{{ $vacation->raccepted }}</td>
+        </tr>
+    @endforeach
+</table>
 @if ($errors->any())
     <div>
         <ul>
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+            <li style="color:red;">{{ $error }}</li>
         @endforeach
         </ul>
     </div>
