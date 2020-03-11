@@ -5,7 +5,6 @@
         <th>名前</th>
         <th>メアド</th>
         <th>時給</th>
-        <th>編集</th>
     </tr>
     @foreach ($items as $item)
     <tr>

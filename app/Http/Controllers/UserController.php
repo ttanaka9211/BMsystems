@@ -64,7 +64,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $user = User::find($user->id);
-        return view('users.edit', ['user' => $user]);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -76,8 +76,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
-        $user->id = $request->id;
+        $user = User::find($user->id);
         $user->name = $request->name;
+        $user->email = $request->email;
         $user->hourly_wage = $request->hourly_wage;
         $user->hiredate = $request->hiredate;
         $user->save();
