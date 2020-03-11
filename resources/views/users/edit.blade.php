@@ -13,7 +13,12 @@
             <label for="hourly_wage">{{ __('hourly_wage') }}</label>
             <input type="text" class="form-control" name="hourly_wage" value="{{ $user->hourly_wage }}" required autofocus>
         </div>
+        <div class="form-group">
+            <label for="hiredate">{{ __('hiredate') }}</label>
+            <input type="date" class="form-control" name="hiredate" value="<?php echo date('Y-m-d');?>" required autofocus>
+        </div>
         <button type="submit" name="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <input type="hidden" name="id">
     </form>
 </div>
 @endsection

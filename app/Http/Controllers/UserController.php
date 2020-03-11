@@ -7,6 +7,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -71,9 +76,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
-        $user = User::find($user->id);
+        $user->id = $request->id;
         $user->name = $request->name;
         $user->hourly_wage = $request->hourly_wage;
+        $user->hiredate = $request->hiredate;
         $user->save();
         return redirect('users/' . $user->id);
     }
