@@ -16,6 +16,7 @@
                     承認できません
             @else
                 承認しました。
+            @endif
             </td>
         </tr>
     @endforeach
