@@ -15,6 +15,8 @@
 //    return view('welcome');
 //});
 
+use App\Http\Controllers\VacationController;
+
 Route::get('/', 'HomeController@index');
 
 /* ログイン、ログアウト、パスワード変更、パスワード変更（忘れた時） */
@@ -59,3 +61,17 @@ Route::group(['middleware' => ['auth', 'can:system-only']], function () {
 //休み希望
 Route::get('posts', 'PostsController@index');
 Route::post('posts', 'PostsController@store');
+Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
+//Route::group(['prefix' => 'admin', 'middleware' => 'admin_auth'], function () {
+//    Route::get('/home', 'Addministrator\HomeController@index');
+//});
+//休み希望送信
+Route::get('vacations', 'VacationController@index');
+Route::post('vacations', 'VacationController@store');
+
+//承認機能
+Route::prefix('admin')->group(function () {
+    Route::get('user_accept', 'Admin\UserAcceptController@index')->middleware('admin_auth');
+    Route::get('ajax/user_accept', 'Admin\Ajax\UserAcceptController@index')->middleware('admin_auth');
+    Route::post('ajax/user_accept/accept', 'Admin\Ajax\UserAcceptController@accept')->middleware('admin_auth');
+});
