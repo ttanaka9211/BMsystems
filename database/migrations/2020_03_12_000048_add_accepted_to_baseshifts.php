@@ -14,7 +14,12 @@ class AddAcceptedToBaseshifts extends Migration
     public function up()
     {
         Schema::table('baseshifts', function (Blueprint $table) {
-            //
+            $table->boolean('accepted')
+                ->default(false)
+                ->comment('管理者承認')
+                ->after('timezone_id');
+            $table->string('name')->after('user_id');
+            $table->string('email')->after('name');
         });
     }
 
@@ -26,7 +31,9 @@ class AddAcceptedToBaseshifts extends Migration
     public function down()
     {
         Schema::table('baseshifts', function (Blueprint $table) {
-            //
+            $table->dropColumn('accepted');
+            $table->dropColumn('name');
+            $table->dropColumn('email');
         });
     }
 }
