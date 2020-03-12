@@ -12,11 +12,11 @@
         <tr>
             <td>{{ $vacation->name }}</td>
             <td>{{ $vacation->date }}</td>
-            <td>{{ if(($vacation->accepted)<1) {
-                承認できません。
-            }　else{
+            <td> @if(($vacation->accepted)<1)
+                    承認できません
+            @else
                 承認しました。
-            } }}</td>
+            </td>
         </tr>
     @endforeach
 </table>
