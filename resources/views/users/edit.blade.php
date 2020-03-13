@@ -10,12 +10,16 @@
             <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}" required autofocus>
         </div>
         <div class="form-group">
+            <label for="email">{{ __('email') }}</label>
+            <input id="email" type="text" class="form-control" name="email" value="{{ $user->email }}" required autofocus>
+        </div>
+        <div class="form-group">
             <label for="hourly_wage">{{ __('hourly_wage') }}</label>
             <input type="text" class="form-control" name="hourly_wage" value="{{ $user->hourly_wage }}" required autofocus>
         </div>
         <div class="form-group">
-            <label for="hiredate">{{ __('hiredate') }}</label>
-            <input type="date" class="form-control" name="hiredate" value="<?php echo date('Y-m-d');?>" required autofocus>
+            <label for="hiredate">{{ __('hire_date') }}</label>
+            <input type="date" class="form-control" name="hire_date" value="<?php echo date('Y-m-d');?>" required autofocus>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">{{ __('Submit') }}</button>
         <input type="hidden" name="id">

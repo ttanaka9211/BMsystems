@@ -76,13 +76,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
-        $user = User::find($user->id);
+        $user = User::find($user);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->hourly_wage = $request->hourly_wage;
-        $user->hiredate = $request->hiredate;
+        $user->hire_date = $request->hire_date;
         $user->save();
-        return redirect('users/' . $user->id);
+        return redirect('users/');
     }
 
     /**
