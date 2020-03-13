@@ -82,3 +82,6 @@ Route::prefix('admin')->group(function () {
     Route::get('baseshift/ajax/user_accept', 'Admin\baseshift\Ajax\UserAcceptController@index')->middleware('admin_auth');
     Route::post('baseshift/ajax/user_accept/accept', 'Admin\baseshift\Ajax\UserAcceptController@accept')->middleware('admin_auth');
 });
+Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
+//ユーザー編集画面
+Route::resource('users', 'UserController');
