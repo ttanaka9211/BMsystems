@@ -17,7 +17,8 @@ class BaseShiftsController extends Controller
     }
     public function index()
     {
-        return view('BaseShifts.index')->with(['BaseShifts' => BaseShift::where('user_id', auth::id())->get()]);
+        return view('BaseShifts.index');
+        //->with(['BaseShifts' => BaseShift::where('user_id', auth::id())->get()]);
     }
 
     public function store(Request $request)
