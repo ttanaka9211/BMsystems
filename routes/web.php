@@ -75,3 +75,6 @@ Route::prefix('admin')->group(function () {
     Route::get('ajax/user_accept', 'Admin\Ajax\UserAcceptController@index')->middleware('admin_auth');
     Route::post('ajax/user_accept/accept', 'Admin\Ajax\UserAcceptController@accept')->middleware('admin_auth');
 });
+Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
+//ユーザー編集画面
+Route::resource('users', 'UserController');
