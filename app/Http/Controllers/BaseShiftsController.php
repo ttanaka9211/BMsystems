@@ -26,15 +26,24 @@ class BaseShiftsController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'name' => 'required',
-            'date' => 'required | after:tomorrow+13day',
-            'reason' => 'required',
+            'email' => 'required',
+            'shift[]' => 'required',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+        //チエックボックスをわける
+        $items = explode("", $request->shift[]);
 
-        BaseShift::create($request->all());
+        //db保存
+        $baseshifts = new BaseShift();
+        $baseshifts->user_id = $request->user_id;
+        $baseshifts->name = $request->name;
+        $baseshifts->email = $request->email;
+        $baseshifts->week_id = $items[0];
+        $baseshifts->timezone_id = $items[1];
+        $baseshifts->save();
         $admin_email = 'admin@example.com';
         Mail::to($admin_email)->send(new ShiftRequest($request->name));
         return redirect('BaseShifts');
