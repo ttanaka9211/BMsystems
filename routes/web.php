@@ -74,7 +74,7 @@ Route::get('baseshift', 'BaseShiftsController@index');
 Route::post('baseshift', 'BaseShiftsController@store');
 
 //承認機能
-Route::prefix('admin')->group(function () {
+Route::prefix('admin/')->group(function () {
     Route::get('vacation/user_accept', 'Admin\Vacation\UserAcceptController@index')->middleware('admin_auth');
     Route::get('vacation/ajax/user_accept', 'Admin\Vacation\Ajax\UserAcceptController@index')->middleware('admin_auth');
     Route::post('vacation/ajax/user_accept/accept', 'Admin\Ajax\UserAcceptController@accept')->middleware('admin_auth');
@@ -85,3 +85,4 @@ Route::prefix('admin')->group(function () {
 Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
 //ユーザー編集画面
 Route::resource('users', 'UserController');
+Route::resource('baseshif', 'BaseShiftController');
