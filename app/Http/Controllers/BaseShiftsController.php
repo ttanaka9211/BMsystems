@@ -34,16 +34,13 @@ class BaseShiftsController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         //チエックボックスをわける
-        $items = explode("", $request->shift[]);
-
-        //db保存
-        $baseshifts = new BaseShift();
-        $baseshifts->user_id = $request->user_id;
-        $baseshifts->name = $request->name;
-        $baseshifts->email = $request->email;
-        $baseshifts->week_id = $items[0];
-        $baseshifts->timezone_id = $items[1];
-        $baseshifts->save();
+        $shifts = $request->shift;
+        foreach ($shifts as $shift) {
+            $s = explode(" ", $shift);
+            array_merge($data, ['user_id' => $user_id, 'name' => $name, 'email' => $email, 'week_id' => $s[0], 'timezone_id' => $s[1], 'created_at' => $now, 'updated_at' => $now]);
+        }
+        //DB保存
+        BaseShift::insert($data);
         $admin_email = 'admin@example.com';
         Mail::to($admin_email)->send(new ShiftRequest($request->name));
         return redirect('BaseShifts');

@@ -71,7 +71,7 @@ Route::post('vacations', 'VacationController@store');
 
 //baseshift送信
 Route::get('baseshift', 'BaseShiftsController@index');
-Route::post('baseshift', 'BaseShiftsController@store');
+Route::post('baseshift/store', 'BaseShiftsController@store');
 
 //承認機能
 Route::prefix('admin/')->group(function () {
