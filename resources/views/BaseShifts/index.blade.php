@@ -1,7 +1,7 @@
     @extends('layouts.app')
 
     @section('content')
-    <form action="{{url('/store')}}" method="post" class="form-group">
+    <form action="{{url('baseshift/store')}}" method="post" class="form-group">
         @csrf
         <div>
             <label>user_id</label><br>
