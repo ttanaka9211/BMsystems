@@ -110,4 +110,5 @@
             <input type="submit" value="送信" />
         </div>
     </form>
+    var_dump($data);
     @endsection
