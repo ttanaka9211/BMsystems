@@ -15,8 +15,6 @@
 //    return view('welcome');
 //});
 
-use App\Http\Controllers\VacationController;
-
 Route::get('/', 'HomeController@index');
 
 /* ログイン、ログアウト、パスワード変更、パスワード変更（忘れた時） */
