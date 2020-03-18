@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Ajax;
+namespace App\Http\Controllers\Admin\BaseShift\Ajax;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,14 +11,14 @@ class UserAcceptController extends Controller
 {
     public function index()
     {
-        $query = \App\Models\Vacation::query();
+        $query = \App\Models\BaseShift::query();
 
         return $query->get();
     }
 
     public function accept(Request $request)
     {
-        $user = \App\Models\Vacation::find($request->user_id);
+        $user = \App\Models\BaseShift::find($request->user_id);
         $user->accepted = $request->accept;
         $result = $user->save();
         $email = new UserAccept($user);

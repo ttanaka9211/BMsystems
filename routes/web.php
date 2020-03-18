@@ -15,8 +15,6 @@
 //    return view('welcome');
 //});
 
-use App\Http\Controllers\VacationController;
-
 Route::get('/', 'HomeController@index');
 
 /* ログイン、ログアウト、パスワード変更、パスワード変更（忘れた時） */
@@ -69,12 +67,20 @@ Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginControll
 Route::get('vacations', 'VacationController@index');
 Route::post('vacations', 'VacationController@store');
 
+//baseshift送信
+Route::get('baseshift', 'BaseShiftsController@index');
+Route::post('baseshift/store', 'BaseShiftsController@store');
+
 //承認機能
-Route::prefix('admin')->group(function () {
-    Route::get('user_accept', 'Admin\UserAcceptController@index')->middleware('admin_auth');
-    Route::get('ajax/user_accept', 'Admin\Ajax\UserAcceptController@index')->middleware('admin_auth');
-    Route::post('ajax/user_accept/accept', 'Admin\Ajax\UserAcceptController@accept')->middleware('admin_auth');
+Route::prefix('admin/')->group(function () {
+    Route::get('vacation/user_accept', 'Admin\Vacation\UserAcceptController@index')->middleware('admin_auth');
+    Route::get('vacation/ajax/user_accept', 'Admin\Vacation\Ajax\UserAcceptController@index')->middleware('admin_auth');
+    Route::post('vacation/ajax/user_accept/accept', 'Admin\Vacation\Ajax\UserAcceptController@accept')->middleware('admin_auth');
+    Route::get('baseshift/user_accept', 'Admin\baseshift\UserAcceptController@index')->middleware('admin_auth');
+    Route::get('baseshift/ajax/user_accept', 'Admin\baseshift\Ajax\UserAcceptController@index')->middleware('admin_auth');
+    Route::post('baseshift/ajax/user_accept/accept', 'Admin\baseshift\Ajax\UserAcceptController@accept')->middleware('admin_auth');
 });
 Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
 //ユーザー編集画面
 Route::resource('users', 'UserController');
+Route::resource('baseshif', 'BaseShiftController');

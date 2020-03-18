@@ -1,3 +1,5 @@
+
+
 <html>
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -44,7 +46,7 @@
             methods: {
                 getUsers() {
 
-                    const url = '/admin/ajax/user_accept';
+                    const url = '/admin/vacation/ajax/user_accept';
                     axios.get(url)
                         .then(response => {
 
@@ -57,7 +59,7 @@
 
                     if(confirm('承認状態を変更します。よろしいですか？')) {
 
-                        const url = '/admin/ajax/user_accept/accept';
+                        const url = '/admin/vacation/ajax/user_accept/accept';
                         const params = {
                             user_id: userId,
                             accept: accepted
