@@ -36,6 +36,8 @@ class BaseShiftsController extends Controller
         }
         //チエックボックスをわける
         $shifts = $request->shift;
+        var_dump($shifts);
+
         $data = array();
         foreach ($shifts as $shift) {
             $s = explode('_', $shift);
