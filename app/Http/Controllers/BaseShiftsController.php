@@ -36,14 +36,14 @@ class BaseShiftsController extends Controller
         }
         //チエックボックスをわける
         $shifts = $request->shift;
-        var_dump($shifts);
+        dump($shifts);
 
         $data = array();
         foreach ($shifts as $shift) {
             $s = explode('_', $shift);
             array_merge($data, ['user_id' => $user_id, 'name' => $name, 'email' => $email, 'week_id' => $s[0], 'timezone_id' => $s[1], 'created_at' => $now, 'updated_at' => $now]);
         }
-        var_dump($data);
+        dump($data);
         //DB保存
         //BaseShift::insert($data);
         //$admin_email = 'admin@example.com';

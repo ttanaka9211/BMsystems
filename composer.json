@@ -23,6 +23,7 @@
         "socialiteproviders/twitter": "^3.0"
     },
     "require-dev": {
+        "beyondcode/laravel-dump-server": "^1.4",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
