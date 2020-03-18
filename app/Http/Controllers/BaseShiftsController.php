@@ -42,9 +42,9 @@ class BaseShiftsController extends Controller
         foreach ($shifts as $shift) {
             $s = explode('_', $shift);
             dump($s);
-            // array_merge($data, [
-            //     'user_id' => $user_id, 'name' => $name, 'email' => $email, 'week_id' => $s[0], 'timezone_id' => $s[1], 'created_at' => $now, 'updated_at' => $now
-            // ]);
+            array_merge($data, [
+                'user_id' => $user_id, 'name' => $name, 'email' => $email, 'week_id' => $s[0], 'timezone_id' => $s[1], //'created_at' => $now, 'updated_at' => $now
+            ]);
         }
         dump($data);
         //DB保存
