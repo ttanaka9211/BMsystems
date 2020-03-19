@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaseShift;
 use Illuminate\Http\Request;
 use App\Models\Shift;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection\orderBy;
 
 
 class ShiftController extends Controller
@@ -24,7 +26,7 @@ class ShiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //当月の日数
         $start = Carbon::now()->addWeeks()->startOfWeek()->toDateString();
@@ -37,6 +39,24 @@ class ShiftController extends Controller
         }
         dump($dateArray);
 
+        $idArray = array();
+        //$builder = BaseShift::select(['id', 'user_id', 'week_id', 'timezone_id'])->get();
+        //dump($builder);
+        $builder = BaseShift::get(['id', 'week_id', 'timezone_id', 'user_id']);
+        $idArray = $builder->toArray();
+        dump($idArray);
+        $idArray = (object) $idArray;
+        dump($idArray);
+        $weeks = $idArray->id;
+        damp($weeks);
+        // foreach ($weeks as $week) {
+        //     $user_id = $array->user_id;
+        //     $week_id = $array->week_id;
+        //     $timezone_id = $array->timezone_id;
+        //     $data[$i] = ['user_id' => $user_id, 'week_id' => $week_id, 'timezone_id' => $timezone_id];
+        //     ++$i;
+        // }
+        // dump($data);
         return view('shift.test');
         // return view('shift.test', compact($dateArray));
     }
