@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Shift;
+use Carbon\Carbon;
+
 
 class ShiftController extends Controller
 {
@@ -23,7 +26,19 @@ class ShiftController extends Controller
      */
     public function create()
     {
-        //
+        //当月の日数
+        $start = Carbon::now()->addWeeks()->startOfWeek()->toDateString();
+        $end = Carbon::now()->addWeeks()->endOfWeek()->toDateString();
+        echo $start;
+        $dateArray = array();
+        $cnt = 0;
+        for ($i = $start; $i <= $end; $i = date(date('Y-m-d', strtotime($i . '+1 day')))) {
+            array_push($dateArray, $i . ',' . ++$cnt);
+        }
+        dump($dateArray);
+
+        return view('shift.test');
+        // return view('shift.test', compact($dateArray));
     }
 
     /**

@@ -84,3 +84,5 @@ Route::get('login/{provider}/callback', 'App\Http\Controllers\Auth\LoginControll
 //ユーザー編集画面
 Route::resource('users', 'UserController');
 Route::resource('baseshif', 'BaseShiftController');
+//シフト作成
+Route::resource('shift', 'ShiftController');
