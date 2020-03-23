@@ -41,21 +41,24 @@ class ShiftController extends Controller
         dump($end->dayOfWeekIso);
         $i = 0;
         $weeks = BaseShift::get(['user_id', 'week_id', 'timezone_id']);
+
+        $date = $start->toDateString();
+
         foreach ($weeks as $week) {
             $user_id = $week->user_id;
             $week_id = $week->week_id;
             $timezone_id = $week->timezone_id;
+            while ($end == $date) {
+                if ($week_id == $start->dayOfWeekIso) {
+                    $result = $date;
+                }
+                $date = date('Y-m-d', strtotime($start . '+1 day'));
+            }
             $data[$i] = [
                 'user_id' => $user_id,
                 'week_id' => $week_id,
                 'timezone_id' => $timezone_id,
-
-                'date'=>(
-                if($week_id==$start->dayOfWeekIso){
-                    $start->toDateString();
-                } else{
-                    date('Y-m-d', strtotime($start.'+1 day'));
-                })
+                'date' => $result
             ];
             ++$i;
         }
