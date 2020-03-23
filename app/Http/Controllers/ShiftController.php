@@ -37,6 +37,7 @@ class ShiftController extends Controller
         // dump($dateArray);
         //dump($start->addDay());
         $i = 0;
+        $a = 0;
         $weeks = BaseShift::get(['user_id', 'week_id', 'timezone_id']);
 
         $date = $start->toDateString();
@@ -45,6 +46,7 @@ class ShiftController extends Controller
         $date3 = $end->dayOfWeekIso;
         $result = 0;
         $a = 0;
+        $b = 0;
         //dump($date);
         //dump($date2);
         //dump($date3);
@@ -57,28 +59,40 @@ class ShiftController extends Controller
             $timezone_id = $week->timezone_id;
             //dump($week_id);
             //dump(strtotime($date));
-            //dump(strtotime($date4));
-            //while ($end == $start) {
-            // if ($week_id == $start->dayOfWeekIso) {
-            //$start->toDateString();
-            //} else {
-            //   $result = $start->addDay(); //date('Y-m-d', strtotime($start . '+1 day'));
-            // }
+            //$start->addDays();
+            //echo $start;
+
+            while ($start <= $end) {
+                //
+
+                echo $start . "<br>";
+                $a = $start->dayOfWeekIso;
+                var_dump($a) . "<br>";
+                var_dump($week_id) . "<br>";
+                if ($a === $week_id) {
+                    //echo $start . "<br>";
+                    $result = $start;
+                }
+
+                $start = $start->addDays();
+
+                echo $result . "(result)<br>";
+            }
+            //dump($result);
             $data[$i] = [
                 'user_id' => $user_id,
                 'week_id' => $week_id,
                 'timezone_id' => $timezone_id,
-                'date' => $start->addDay($a)->toDateString()
+                'date' => $result->toDateString()
             ];
             ++$i;
-            ++$a;
         }
+        //dump($result);
+
         //dump($date);
         dump($data);
-
         return view('shift.test');
         // return view('shift.test', compact($dateArray));
-
     }
     /**
      * Store a newly created resource in storage.
