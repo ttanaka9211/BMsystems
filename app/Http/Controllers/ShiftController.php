@@ -35,39 +35,51 @@ class ShiftController extends Controller
         //     array_push($dateArray, $i.','.++$cnt);
         // }
         // dump($dateArray);
-        dump($start->dayOfWeek);
-        dump($start->toDateString());
-
-        dump($end->dayOfWeekIso);
+        //dump($start->addDay());
         $i = 0;
         $weeks = BaseShift::get(['user_id', 'week_id', 'timezone_id']);
 
         $date = $start->toDateString();
-
+        $date4 = $end->toDateString();
+        $date2 = $start->dayOfWeekIso;
+        $date3 = $end->dayOfWeekIso;
+        $result = 0;
+        $a = 0;
+        //dump($date);
+        //dump($date2);
+        //dump($date3);
+        //dump($date4);
+        //dump($start->addDay());
+        //
         foreach ($weeks as $week) {
             $user_id = $week->user_id;
             $week_id = $week->week_id;
             $timezone_id = $week->timezone_id;
-            while ($end == $date) {
-                if ($week_id == $start->dayOfWeekIso) {
-                    $result = $date;
-                }
-                $date = date('Y-m-d', strtotime($start . '+1 day'));
-            }
+            //dump($week_id);
+            //dump(strtotime($date));
+            //dump(strtotime($date4));
+            //while ($end == $start) {
+            // if ($week_id == $start->dayOfWeekIso) {
+            //$start->toDateString();
+            //} else {
+            //   $result = $start->addDay(); //date('Y-m-d', strtotime($start . '+1 day'));
+            // }
             $data[$i] = [
                 'user_id' => $user_id,
                 'week_id' => $week_id,
                 'timezone_id' => $timezone_id,
-                'date' => $result
+                'date' => $start->addDay($a)->toDateString()
             ];
             ++$i;
+            ++$a;
         }
+        //dump($date);
         dump($data);
 
         return view('shift.test');
         // return view('shift.test', compact($dateArray));
-    }
 
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -77,7 +89,9 @@ class ShiftController extends Controller
      */
     public function store(Request $request)
     {
+        //
     }
+
 
     /**
      * Display the specified resource.
