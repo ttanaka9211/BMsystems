@@ -34,56 +34,76 @@ class ShiftController extends Controller
         // for ($i = $start; $i <= $end; $i = date(date('Y-m-d', strtotime($i.'+1 day')))) {
         //     array_push($dateArray, $i.','.++$cnt);
         // }
-        // dump($dateArray);
-        //dump($start->addDay());
+        $start_date = 0;
         $i = 0;
         $a = 0;
         $weeks = BaseShift::get(['user_id', 'week_id', 'timezone_id']);
 
-        $date = $start->toDateString();
-        $date4 = $end->toDateString();
-        $date2 = $start->dayOfWeekIso;
-        $date3 = $end->dayOfWeekIso;
+        //$date = $start->toDateString();
         $result = 0;
         $a = 0;
         $b = 0;
+        //$a = $start->dayOfWeekIso;
+        //echo $a;
         foreach ($weeks as $week) {
             $user_id = $week->user_id;
             $week_id = $week->week_id;
             $timezone_id = $week->timezone_id;
-            //dump($week_id);
-            //dump(strtotime($date));
-            //$start->addDays();
-            //echo $start;
-
-            while ($start <= $end) {
-                echo $start.'<br>';
-                $a = $start->dayOfWeekIso;
-                var_dump($a).'<br>';
-                var_dump($week_id).'<br>';
-                if ($a === $week_id) {
-                    //echo $start . "<br>";
-                    $result = $start;
-                }
-
+            //日付計算
+            while ($start->dayOfWeekIso == $week_id) {
+                $result = $start;
                 $start = $start->addDays();
-
-                echo $result.'(result)<br>';
             }
-            //dump($result);
+
+            //開始時間
+            $start_time = config('const.timezone_start')[$timezone_id];
+            $year = $result->year;
+            $month = $result->month;
+            $day = $result->day;
+            $hour = $start_time;
+            $minute = 0;
+            $second = 0;
+            $start_date = Carbon::create(
+                $year,
+                $month,
+                $day,
+                $hour,
+                $minute,
+                $second
+            );
+
+            //終了時間
+            $end_time = config('const.timezone_end')[$timezone_id];
+            $year = $result->year;
+            $month = $result->month;
+            $day = $result->day;
+            $hour = $end_time;
+            $minute = 0;
+            $second = 0;
+            $end_date = Carbon::create(
+                $year,
+                $month,
+                $day,
+                $hour,
+                $minute,
+                $second
+            );
+            echo $start_date.'<br>';
+            echo $timezone_id.'<br>';
+
+            //db登録用配列
             $data[$i] = [
                 'user_id' => $user_id,
                 'week_id' => $week_id,
                 'timezone_id' => $timezone_id,
+                'start_time' => $start_date,
+                'ending_time' => $end_date,
                 'date' => $result->toDateString(),
             ];
             ++$i;
         }
-        //dump($result);
-
-        //dump($date);
-        dump($data);
-
+        //DB保存
+        //Shift::insert($data);
         return view('shift.test');
         // return view('shift.test', compact($dateArray));
     }
