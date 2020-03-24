@@ -71,6 +71,7 @@ class ShiftController extends Controller
                 $minute,
                 $second
             );
+            dump($start_date);
 
             //終了時間
             $end_time = config('const.timezone_end')[$timezone_id];
@@ -88,8 +89,8 @@ class ShiftController extends Controller
                 $minute,
                 $second
             );
-            echo $start_date.'<br>';
-            echo $timezone_id.'<br>';
+            //echo $start_date.'<br>';
+            //echo $timezone_id.'<br>';
 
             //db登録用配列
             $data[$i] = [
@@ -103,7 +104,8 @@ class ShiftController extends Controller
             ++$i;
         }
         //DB保存
-        //Shift::insert($data);
+        Shift::insert($data);
+
         return view('shift.test');
         // return view('shift.test', compact($dateArray));
     }
