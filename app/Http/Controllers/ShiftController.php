@@ -39,31 +39,19 @@ class ShiftController extends Controller
         $weeks = BaseShift::get(['user_id', 'week_id', 'timezone_id']);
 
         $date = $start->toDateString();
-        $date4 = $end->toDateString();
-        $date2 = $start->dayOfWeekIso;
-        $date3 = $end->dayOfWeekIso;
         $result = 0;
         $a = 0;
         $b = 0;
-
+        //$a = $start->dayOfWeekIso;
+        //echo $a;
         foreach ($weeks as $week) {
             $user_id = $week->user_id;
             $week_id = $week->week_id;
             $timezone_id = $week->timezone_id;
-
-            while ($start <= $end) {
-                echo $start . "<br>";
-                $a = $start->dayOfWeekIso;
-                var_dump($a) . "<br>";
-                var_dump($week_id) . "<br>";
-                if ($a === $week_id) {
-                    //echo $start . "<br>";
-                    $result = $start;
-                }
+            while ($start->dayOfWeekIso == $week_id) {
+                $result = $start;
                 $start = $start->addDays();
-                echo $result . "(result)<br>";
             }
-
             $data[$i] = [
                 'user_id' => $user_id,
                 'week_id' => $week_id,
@@ -73,8 +61,9 @@ class ShiftController extends Controller
             ++$i;
         }
         //dump($result);
-        //dump($date);
         dump($data);
+        //DB保存
+        Shift::insert($data);
         return view('shift.test');
         // return view('shift.test', compact($dateArray));
     }
