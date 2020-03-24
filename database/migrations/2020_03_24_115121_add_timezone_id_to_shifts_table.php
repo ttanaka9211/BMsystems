@@ -15,8 +15,8 @@ class AddTimezoneIdToShiftsTable extends Migration
     {
         Schema::table('shifts', function (Blueprint $table) {
             $table->integer('timezone_id')->after('week_id');
-            $table->date('start_time')->nullable()->change();
-            $table->date('ending_time')->nullable()->change();
+            $table->dateTime('start_time')->change();
+            $table->dateTime('ending_time')->change();
             $table->integer('accepted')->default(0)->change();
         });
     }
