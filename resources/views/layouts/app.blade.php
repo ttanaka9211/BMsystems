@@ -33,20 +33,8 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        @can('system-only') {{-- システム管理者権限のみに表示される --}}
-                            <li><a href="">機能１</a></li>
-                        @elsecan('admin-higher')　{{-- 管理者権限以上に表示される --}}
-                            <li><a href="">機能２</a></li>
-                            <li><a href="">機能３</a></li>
-                        @elsecan('user-higher') {{-- 一般権限以上に表示される --}}
-                            <li><a href="">機能４</a></li>
-                            <li><a href="">機能４</a></li>
-                            <li><a href="">機能４</a></li>
-                            <li><a href="">機能５</a></li>
-                        @endcan
-                    </ul>
+
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -83,6 +71,20 @@
                 </div>
             </div>
         </nav>
+        {{-- <div class="col-md-2">
+      <div class="card">
+          <div class="card-header"><i class="fas fa-th-list"></i></i> MENU</div>
+          <div class="card-body">
+              <div class="panel panel-default">
+                  <ul class="nav nav-pills nav-stacked" style="display:block;">
+                      <li><i class="fas fa-user-alt"></i> <a href="#">XXXXXXXX</a></li>
+                      <li><i class="fas fa-user-alt"></i> <a href="#">XXXXXXXX</a></li>
+                      <li><i class="fas fa-user-alt"></i> <a href="#">XXXXXXXX</a></li>
+                </ul>
+              {{-- </div>
+          </div>
+      </div>
+  </div> --}}
 
         <main class="py-4">
             @yield('content')
