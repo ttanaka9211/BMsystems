@@ -1,7 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h1>時給変更</h1>
+     <div class="row justify-content-center">
+        @include('layouts.menu')
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">時給変更</div>
+                <div class="card-body">
     <form action="{{ url('users/'.$user->id) }}" method="post">
         @csrf
         @method('PUT')
@@ -24,5 +29,6 @@
         <button type="submit" name="submit" class="btn btn-primary">{{ __('Submit') }}</button>
         <input type="hidden" name="id">
     </form>
+                </div>
 </div>
 @endsection

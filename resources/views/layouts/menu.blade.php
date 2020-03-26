@@ -1,6 +1,6 @@
 <div class="col-md-2">
     <div class="card">
-        <div class="card-header"><i class="fas fa-th-list"></i></i> MENU</div>
+        <div class="card-header">メニュー</div>
         <div class="card-body">
             <div class="panel panel-default">
                 {{-- <ul class="nav nav-pills nav-stacked" style="display:block;"> --}}

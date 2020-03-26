@@ -1,13 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>休日申請</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        @include('layouts.menu')
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-header">休日申請</div>
+                <div class="card-body d-flex align-items-center">
+                    <div class="card-title d-flex align-items-center">
 <table>
     <tr>
         <th>名前</th>
         <th>日付</th>
         <th>承認状態</th>
     </tr>
+    </div>
     @foreach ($vacations as $vacation)
         <tr>
             <td>{{ $vacation->name }}</td>
@@ -21,6 +29,8 @@
         </tr>
     @endforeach
 </table>
+                </div>
+                <div class="card-body d-flex align-items-center">
 @if ($errors->any())
     <div>
         <ul>
@@ -30,6 +40,8 @@
         </ul>
     </div>
 @endif
+                </div>
+<div class="card-body d-flex align-items-center">
 
 <form action="/vacations" method="POST">
     {{ csrf_field() }}
@@ -57,4 +69,5 @@
         <input type="submit" value="Create" />
     </div>
 </form>
+</div>
 @endsection
