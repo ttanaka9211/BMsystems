@@ -86,3 +86,6 @@ Route::resource('users', 'UserController');
 Route::resource('baseshif', 'BaseShiftController');
 //シフト作成
 Route::resource('shift', 'ShiftController');
+Route::get('shift/setEvents', 'ShiftController@setEvents');
+Route::post('shift/ajax/addEvent', 'ShiftController@addEvent');
+Route::post('shift/ajax/editEventDate', 'ShiftController@editEventDate');

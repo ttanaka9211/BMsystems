@@ -16,6 +16,7 @@ class ShiftController extends Controller
      */
     public function index()
     {
+        return view('shift.calendar');
     }
 
     /**
@@ -106,9 +107,62 @@ class ShiftController extends Controller
         //DB保存
         Shift::insert($data);
 
-        return view('shift.test');
+        return view('shift.calendar');
         // return view('shift.test', compact($dateArray));
     }
+
+    public function setShifts(Request $request)
+    {
+        $start = $this->formatDate($request->all()['start']);
+        $end = $this->formatDate($request->all()['end']);
+
+        $events = Shift::select('id', 'user_id', 'start_time', 'ending_time')->whereBetween('start_time', [$start, $end])->get();
+        $newArr = [];
+        foreach ($events as $item) {
+            $newItem['id'] = $item['id'];
+            $newItem['user_id'] = $item['user_id'];
+            $newItem['start_time'] = $item['start_time'];
+            $newItem['ending_time'] = $item['ending_time'];
+            $newArr[] = $newItem;
+        }
+        echo json_encode($newArr);
+    }
+
+    public function formatDate($date)
+    {
+        return str_replace('T00:00:00+09:00', '', $date);
+    }
+
+    public function addEvent(Request $request)
+    {
+        $data = $request->all();
+        $event = new Shift();
+        $event->id = $this->generateId();
+        $event->date = $data['date'];
+        $event->start_time = $data['start_time'];
+        $event->ending_time = $data['ending_time'];
+        $event->user_id = $data['user_id'];
+        $event->save();
+
+        return response()->json(['id' => $event->id]);
+    }
+
+    // ajaxで受け取ったデータをデータベースに追加し、今度はidを返す。
+
+    public function editEventDate(Request $request)
+    {
+        $data = $request->all();
+        $event = Shift::find($data['id']);
+        $event->date = $data['newDate'];
+        $event->start_time = $data['start_time'];
+        $event->ending_time = $data['ending_time'];
+        $event->user_id = $data['user_id'];
+        $event->save();
+
+        return null;
+    }
+
+    // ajaxで受け取ったデータからデータベースの日付データを変更。
 
     /**
      * Store a newly created resource in storage.
