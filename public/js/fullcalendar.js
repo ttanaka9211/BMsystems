@@ -1,10 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var Calendar = FullCalendar.Calendar;
+    var Draggable = FullCalendarInteraction.Draggable;
+
+    var containerEl = document.getElementById('external-events');
     var calendarEl = document.getElementById('calendar');
+    var checkbox = document.getElementById('drop-remove');
+
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: ['interaction', 'dayGrid'],
+
+        plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+        locale: 'ja',
         //プラグイン読み込み
-        defaultView: 'dayGridMonth',
+        header: {
+            left: 'today month,basicWeek',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay'
+        },
+        defaultView: 'timeGridWeek',
         //カレンダーを月ごとに表示
         editable: true,
         //イベント編集
